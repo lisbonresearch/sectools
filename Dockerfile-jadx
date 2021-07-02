@@ -1,0 +1,14 @@
+FROM alpine
+
+RUN \
+    apk add --no-cache curl unzip && \
+    curl -L https://github.com/skylot/jadx/releases/download/v1.2.0/jadx-1.2.0.zip -o /jadx-1.2.0.zip && \
+    unzip /jadx-1.2.0.zip -d /jadx-1.2.0
+
+FROM openjdk:8-alpine
+
+RUN apk add --no-cache ttf-dejavu
+
+COPY --from=0 /jadx-1.2.0 /jadx-1.2.0
+
+ENTRYPOINT ["/jadx-1.2.0/bin/jadx-gui"]

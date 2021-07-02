@@ -1,5 +1,12 @@
 version: "3.7"
 services:
+  jadx:
+    build:
+      context: .
+      dockerfile: Dockerfile-jadx
+    volumes:
+      - "./shared:/shared"
+      - "/tmp/.X11-unix:/tmp/.X11-unix"
   jdgui:
     build:
       context: .
