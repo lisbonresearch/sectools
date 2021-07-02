@@ -1,8 +1,17 @@
 version: "3.7"
 services:
-  sslyze:
-    image: nablac0d3/sslyze
+  jdgui:
+    build:
+      context: .
+      dockerfile: Dockerfile-jdgui
+    volumes:
+      - "./shared:/shared"
+      - "/tmp/.X11-unix:/tmp/.X11-unix"
+
   jsbeautify:
     build:
       context: .
       dockerfile: Dockerfile-jsbeautify
+
+  sslyze:
+    image: nablac0d3/sslyze
