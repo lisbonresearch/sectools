@@ -1,0 +1,8 @@
+version: "3.7"
+services:
+  sslyze:
+    image: nablac0d3/sslyze
+  jsbeautify:
+    build:
+      context: .
+      dockerfile: Dockerfile-jsbeautify

@@ -1,0 +1,6 @@
+FROM node
+
+RUN \
+    npm -g install js-beautify
+
+ENTRYPOINT ["js-beautify"]
