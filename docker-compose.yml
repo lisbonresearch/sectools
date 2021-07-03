@@ -1,5 +1,12 @@
 version: "3.7"
 services:
+  apktool:
+    build:
+      context: .
+      dockerfile: Dockerfile-apktool
+    volumes:
+      - "./shared:/shared"
+
   jadx:
     build:
       context: .
@@ -7,6 +14,7 @@ services:
     volumes:
       - "./shared:/shared"
       - "/tmp/.X11-unix:/tmp/.X11-unix"
+
   jdgui:
     build:
       context: .
