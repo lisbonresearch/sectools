@@ -1,0 +1,15 @@
+FROM debian
+
+RUN \
+    apt-get update && apt-get install -y \
+        unzip \
+        wget \
+    && wget https://dl.google.com/android/repository/platform-tools-latest-linux.zip \
+    && unzip platform-tools-latest-linux.zip
+
+FROM debian
+
+COPY --from=0 /platform-tools /platform-tools
+
+ENV PATH="/platform-tools:${PATH}"
+WORKDIR /shared

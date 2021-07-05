@@ -1,5 +1,14 @@
 version: "3.7"
 services:
+  android-platformtools:
+    build:
+      context: .
+      dockerfile: Dockerfile-android-platformtools
+    volumes:
+      - "./shared:/shared"
+    devices:
+      - "/dev/bus"
+
   apktool:
     build:
       context: .
