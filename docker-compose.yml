@@ -37,5 +37,15 @@ services:
       context: .
       dockerfile: Dockerfile-jsbeautify
 
+  sourcegraph:
+    image: sourcegraph/server:3.29.1
+    ports:
+      - "127.0.0.1:7080:7080"
+      - "127.0.0.1:3070:3070"
+    volumes:
+      - ./shared/sourcegraph/config:/etc/sourcegraph
+      - ./shared/sourcegraph/data:/var/opt/sourcegraph
+      - ./shared/sourcegraph/repos:/repos:ro
+
   sslyze:
     image: nablac0d3/sslyze
