@@ -27,6 +27,14 @@ services:
     volumes:
       - "./shared:/shared"
 
+  ilspy:
+    build:
+      context: .
+      dockerfile: Dockerfile-ilspy
+    volumes:
+      - "./shared:/shared"
+      - "/tmp/.X11-unix:/tmp/.X11-unix"
+
   jadx:
     build:
       context: .

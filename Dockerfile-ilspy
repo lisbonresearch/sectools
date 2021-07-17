@@ -1,0 +1,18 @@
+FROM debian
+
+RUN \
+    apt-get update && apt-get install -y \
+        unzip \
+        wget \
+    && wget https://github.com/icsharpcode/AvaloniaILSpy/releases/download/v7.0-rc2/linux-x64.zip \
+    && unzip linux-x64.zip \
+    && unzip ILSpy-linux-x64-Release.zip \
+    && mv artifacts ilspy
+
+FROM mono
+
+COPY --from=0 /ilspy /ilspy
+
+WORKDIR /shared
+
+ENTRYPOINT ["/ilspy/linux-x64/ILSpy"]
