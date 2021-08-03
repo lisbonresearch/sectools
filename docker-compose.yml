@@ -27,6 +27,13 @@ services:
     volumes:
       - "./shared:/shared"
 
+  ffuf:
+    build:
+      context: .
+      dockerfile: Dockerfile-ffuf
+    volumes:
+      - "./shared:/shared"
+
   ilspy:
     build:
       context: .
@@ -55,6 +62,14 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-jsbeautify
+
+  msfconsole:
+    image: metasploitframework/metasploit-framework
+
+  nmap:
+    build:
+      context: .
+      dockerfile: Dockerfile-nmap
 
   sourcegraph:
     image: sourcegraph/server:3.29.1

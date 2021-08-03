@@ -1,0 +1,14 @@
+FROM alpine
+
+RUN \
+	apk add --no-cache curl \
+	&& curl -L https://github.com/ffuf/ffuf/releases/download/v1.3.1/ffuf_1.3.1_linux_amd64.tar.gz -o ffuf.tar.gz \
+	&& tar zxf ffuf.tar.gz
+
+FROM alpine
+
+COPY --from=0 /ffuf /ffuf
+
+WORKDIR /shared
+
+ENTRYPOINT ["/ffuf"]
