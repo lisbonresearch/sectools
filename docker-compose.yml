@@ -42,6 +42,11 @@ services:
       - "./shared:/shared"
       - "/tmp/.X11-unix:/tmp/.X11-unix"
 
+  impacket:
+    build:
+      context: .
+      dockerfile: Dockerfile-impacket
+
   jadx:
     build:
       context: .
