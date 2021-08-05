@@ -34,6 +34,13 @@ services:
     volumes:
       - "./shared:/shared"
 
+  hydra:
+    build:
+      context: .
+      dockerfile: Dockerfile-hydra
+    volumes:
+      - "./shared:/shared"
+
   ilspy:
     build:
       context: .
@@ -70,6 +77,8 @@ services:
 
   msfconsole:
     image: metasploitframework/metasploit-framework
+    volumes:
+      - "./shared:/shared"
 
   nmap:
     build:
