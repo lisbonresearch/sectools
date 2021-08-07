@@ -27,6 +27,9 @@ services:
     volumes:
       - "./shared:/shared"
 
+  evil-winrm:
+    image: oscarakaelvis/evil-winrm
+
   ffuf:
     build:
       context: .
