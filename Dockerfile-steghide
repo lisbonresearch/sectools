@@ -1,0 +1,9 @@
+FROM alpine
+
+RUN \
+	apk add --no-cache \
+		steghide --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing
+
+WORKDIR /shared
+
+ENTRYPOINT ["steghide"]

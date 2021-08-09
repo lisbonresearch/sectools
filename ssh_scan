@@ -1,0 +1,3 @@
+#!/bin/sh
+
+docker-compose run --rm ssh_scan /app/bin/ssh_scan "$@"

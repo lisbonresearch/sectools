@@ -98,5 +98,15 @@ services:
       - ./shared/sourcegraph/data:/var/opt/sourcegraph
       - ./shared/sourcegraph/repos:/repos:ro
 
+  ssh_scan:
+    image: mozilla/ssh_scan
+
   sslyze:
     image: nablac0d3/sslyze
+
+  steghide:
+    build:
+      context: .
+      dockerfile: Dockerfile-steghide
+    volumes:
+      - "./shared:/shared"
