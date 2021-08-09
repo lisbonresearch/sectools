@@ -110,3 +110,11 @@ services:
       dockerfile: Dockerfile-steghide
     volumes:
       - "./shared:/shared"
+
+  wireshark:
+    build:
+      context: .
+      dockerfile: Dockerfile-wireshark
+    volumes:
+      - "./shared:/shared"
+      - "/tmp/.X11-unix:/tmp/.X11-unix"
