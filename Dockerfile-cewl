@@ -1,0 +1,11 @@
+FROM ruby
+
+RUN \
+	git clone https://github.com/digininja/CeWL.git \
+	&& cd CeWL \
+	&& bundle install \
+	&& chmod u+x cewl.rb
+
+WORKDIR /shared
+
+ENTRYPOINT ["/CeWL/cewl.rb"]

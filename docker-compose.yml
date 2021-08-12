@@ -27,6 +27,11 @@ services:
     volumes:
       - "./shared:/shared"
 
+  cewl:
+    build:
+      context: .
+      dockerfile: Dockerfile-cewl
+
   evil-winrm:
     image: oscarakaelvis/evil-winrm
 
@@ -73,6 +78,13 @@ services:
       - "./shared:/shared"
       - "/tmp/.X11-unix:/tmp/.X11-unix"
 
+  john:
+    build:
+      context: .
+      dockerfile: Dockerfile-john
+    volumes:
+      - "./shared:/shared"
+
   jsbeautify:
     build:
       context: .
@@ -87,6 +99,13 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-nmap
+
+  python:
+    image: python:3
+    command: /bin/bash
+    working_dir: /shared
+    volumes:
+      - "./shared:/shared"
 
   sourcegraph:
     image: sourcegraph/server:3.29.1
