@@ -1,0 +1,13 @@
+FROM alpine
+
+RUN \
+    apk add --no-cache curl && \
+    curl -L https://github.com/irsdl/IIS-ShortName-Scanner/raw/master/iis_shortname_scanner.jar -o iis_shortname_scanner.jar && \
+    curl -L https://github.com/irsdl/IIS-ShortName-Scanner/raw/master/config.xml -o config.xml
+
+FROM openjdk:7-alpine
+
+COPY --from=0 /iis_shortname_scanner.jar /iis_shortname_scanner.jar
+COPY --from=0 /config.xml /config.xml
+
+ENTRYPOINT ["java", "-jar", "/iis_shortname_scanner.jar"]

@@ -38,14 +38,14 @@ services:
   ffuf:
     build:
       context: .
-      dockerfile: Dockerfile-ffuf
+      dockerfile: Dockerfiles/Dockerfile-ffuf
     volumes:
       - "./shared:/shared"
 
   hydra:
     build:
       context: .
-      dockerfile: Dockerfile-hydra
+      dockerfile: Dockerfiles/Dockerfile-hydra
     volumes:
       - "./shared:/shared"
 
@@ -56,6 +56,13 @@ services:
     volumes:
       - "./shared:/shared"
       - "/tmp/.X11-unix:/tmp/.X11-unix"
+
+  iisshortname:
+    build:
+      context: .
+      dockerfile: Dockerfiles/Dockerfile-iisshortname
+    volumes:
+      - "./shared:/shared"
 
   impacket:
     build:
@@ -90,6 +97,11 @@ services:
       context: .
       dockerfile: Dockerfile-jsbeautify
 
+  masscan:
+    build:
+      context: .
+      dockerfile: Dockerfiles/Dockerfile-masscan
+
   msfconsole:
     image: metasploitframework/metasploit-framework
     volumes:
@@ -98,7 +110,7 @@ services:
   nmap:
     build:
       context: .
-      dockerfile: Dockerfile-nmap
+      dockerfile: Dockerfiles/Dockerfile-nmap
 
   python:
     image: python:3
@@ -130,6 +142,9 @@ services:
     volumes:
       - "./shared:/shared"
 
+  testssl:
+    image: drwetter/testssl.sh
+
   wireshark:
     build:
       context: .
@@ -137,3 +152,6 @@ services:
     volumes:
       - "./shared:/shared"
       - "/tmp/.X11-unix:/tmp/.X11-unix"
+
+  wpscan:
+    image: wpscanteam/wpscan
