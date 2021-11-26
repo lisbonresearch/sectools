@@ -120,7 +120,7 @@ services:
       - "./shared:/shared"
 
   sourcegraph:
-    image: sourcegraph/server:3.29.1
+    image: sourcegraph/server:3.31.2
     ports:
       - "127.0.0.1:7080:7080"
       - "127.0.0.1:3070:3070"
