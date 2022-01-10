@@ -112,6 +112,14 @@ services:
       context: .
       dockerfile: Dockerfiles/Dockerfile-nmap
 
+  peepdf:
+    build:
+      context: .
+      dockerfile: Dockerfiles/Dockerfile-peepdf
+    working_dir: /shared
+    volumes:
+      - "./shared:/shared"
+
   python:
     image: python:3
     command: /bin/bash
