@@ -128,10 +128,10 @@ services:
       - "./shared:/shared"
 
   sourcegraph:
-    image: sourcegraph/server:3.31.2
+    image: sourcegraph/server:3.35.1
     ports:
-      - "127.0.0.1:7080:7080"
-      - "127.0.0.1:3070:3070"
+      - "7080:7080"
+      - "3070:3070"
     volumes:
       - ./shared/sourcegraph/config:/etc/sourcegraph
       - ./shared/sourcegraph/data:/var/opt/sourcegraph
