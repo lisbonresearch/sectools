@@ -137,6 +137,14 @@ services:
       - ./shared/sourcegraph/data:/var/opt/sourcegraph
       - ./shared/sourcegraph/repos:/repos:ro
 
+  sqlmap:
+    build:
+      context: .
+      dockerfile: Dockerfiles/Dockerfile-sqlmap
+    working_dir: /shared
+    volumes:
+      - "./shared:/shared"
+
   ssh_scan:
     image: mozilla/ssh_scan
 
