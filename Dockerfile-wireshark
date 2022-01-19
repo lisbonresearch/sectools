@@ -3,8 +3,11 @@ FROM alpine
 RUN \
 	apk add --no-cache \
 		ttf-dejavu \
-		wireshark
+		wireshark \
+		xauth \
+	&& echo -e '#!/bin/sh\nxauth add $DISPLAY . $MAGICCOOKIE && wireshark' > /start.sh \
+	&& chmod ugo+x /start.sh
 
 WORKDIR /shared
 
-ENTRYPOINT ["wireshark"]
+ENTRYPOINT ["/start.sh"]
