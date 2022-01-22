@@ -127,6 +127,15 @@ services:
     volumes:
       - "./shared:/shared"
 
+  soapui:
+    build:
+      context: .
+      dockerfile: Dockerfiles/Dockerfile-soapui
+    working_dir: /shared
+    volumes:
+      - "./shared:/shared"
+      - "/tmp/.X11-unix:/tmp/.X11-unix"
+
   sourcegraph:
     image: sourcegraph/server:3.35.1
     ports:

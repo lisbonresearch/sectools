@@ -1,0 +1,33 @@
+FROM debian
+
+RUN \
+	apt-get update && \
+	apt-get install -y \
+		libxi6 \
+		libxrender1 \
+		libxtst6 \
+		libxfixes3 \
+		libasound2 \
+		libxcomposite1 \
+		libcairo2 \
+		libpango-1.0-0 \
+		libatspi2.0-0 \
+		libatk-bridge2.0-0 \
+		libdrm2 \
+		libgtk-3-0 \
+		libnspr4 \
+		libnss3 \
+		libgbm1 \
+		libxshmfence1 \
+		fonts-dejavu \
+		xauth \
+		wget && \
+	wget https://s3.amazonaws.com/downloads.eviware/soapuios/5.7.0/SoapUI-x64-5.7.0.sh && \
+	chmod u+x /SoapUI-x64-5.7.0.sh && \
+	/SoapUI-x64-5.7.0.sh -q && \
+	rm /SoapUI-x64-5.7.0.sh && \
+	echo '#!/bin/sh' > /start.sh && \
+	echo 'xauth add $DISPLAY . $MAGICCOOKIE && /usr/local/SmartBear/SoapUI-5.7.0/bin/soapui.sh' >> /start.sh && \
+	chmod ugo+x /start.sh
+
+ENTRYPOINT ["/start.sh"]
