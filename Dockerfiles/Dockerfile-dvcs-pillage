@@ -1,0 +1,14 @@
+FROM debian
+
+RUN \
+	apt-get update \
+	&& apt-get install -y \
+		git \
+		unzip \
+		wget \
+	&& wget https://github.com/evilpacket/DVCS-Pillage/archive/refs/heads/master.zip \
+	&& unzip master.zip
+
+WORKDIR /shared
+
+ENTRYPOINT ["/DVCS-Pillage-master/gitpillage.sh"]

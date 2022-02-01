@@ -14,7 +14,7 @@ services:
   android-platformtools:
     build:
       context: .
-      dockerfile: Dockerfile-android-platformtools
+      dockerfile: Dockerfiles/Dockerfile-android-platformtools
     volumes:
       - "./shared:/shared"
     devices:
@@ -23,14 +23,28 @@ services:
   apktool:
     build:
       context: .
-      dockerfile: Dockerfile-apktool
+      dockerfile: Dockerfiles/Dockerfile-apktool
     volumes:
       - "./shared:/shared"
 
   cewl:
     build:
       context: .
-      dockerfile: Dockerfile-cewl
+      dockerfile: Dockerfiles/Dockerfile-cewl
+
+  cfr:
+    build:
+      context: .
+      dockerfile: Dockerfiles/Dockerfile-cfr
+    volumes:
+      - "./shared:/shared"
+
+  dvcs-pillage:
+    build:
+      context: .
+      dockerfile: Dockerfiles/Dockerfile-dvcs-pillage
+    volumes:
+      - "./shared:/shared"
 
   evil-winrm:
     image: oscarakaelvis/evil-winrm
@@ -42,6 +56,21 @@ services:
     volumes:
       - "./shared:/shared"
 
+  frida:
+    build:
+      context: .
+      dockerfile: Dockerfiles/Dockerfile-frida
+    volumes:
+      - "./shared:/shared"
+
+  ghidra:
+    build:
+      context: .
+      dockerfile: Dockerfiles/Dockerfile-ghidra
+    volumes:
+      - "./shared:/shared"
+      - "/tmp/.X11-unix:/tmp/.X11-unix"
+
   hydra:
     build:
       context: .
@@ -52,7 +81,7 @@ services:
   ilspy:
     build:
       context: .
-      dockerfile: Dockerfile-ilspy
+      dockerfile: Dockerfiles/Dockerfile-ilspy
     volumes:
       - "./shared:/shared"
       - "/tmp/.X11-unix:/tmp/.X11-unix"
@@ -67,12 +96,12 @@ services:
   impacket:
     build:
       context: .
-      dockerfile: Dockerfile-impacket
+      dockerfile: Dockerfiles/Dockerfile-impacket
 
   jadx:
     build:
       context: .
-      dockerfile: Dockerfile-jadx
+      dockerfile: Dockerfiles/Dockerfile-jadx
     volumes:
       - "./shared:/shared"
       - "/tmp/.X11-unix:/tmp/.X11-unix"
@@ -80,7 +109,7 @@ services:
   jdgui:
     build:
       context: .
-      dockerfile: Dockerfile-jdgui
+      dockerfile: Dockerfiles/Dockerfile-jdgui
     volumes:
       - "./shared:/shared"
       - "/tmp/.X11-unix:/tmp/.X11-unix"
@@ -88,14 +117,14 @@ services:
   john:
     build:
       context: .
-      dockerfile: Dockerfile-john
+      dockerfile: Dockerfiles/Dockerfile-john
     volumes:
       - "./shared:/shared"
 
   jsbeautify:
     build:
       context: .
-      dockerfile: Dockerfile-jsbeautify
+      dockerfile: Dockerfiles/Dockerfile-jsbeautify
 
   masscan:
     build:
@@ -163,7 +192,7 @@ services:
   steghide:
     build:
       context: .
-      dockerfile: Dockerfile-steghide
+      dockerfile: Dockerfiles/Dockerfile-steghide
     volumes:
       - "./shared:/shared"
 
@@ -173,7 +202,7 @@ services:
   wireshark:
     build:
       context: .
-      dockerfile: Dockerfile-wireshark
+      dockerfile: Dockerfiles/Dockerfile-wireshark
     volumes:
       - "./shared:/shared"
       - "/tmp/.X11-unix:/tmp/.X11-unix"

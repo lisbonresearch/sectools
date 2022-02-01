@@ -1,0 +1,13 @@
+FROM alpine
+
+RUN \
+    apk add --no-cache curl && \
+    curl -L https://www.benf.org/other/cfr/cfr-0.151.jar -o /cfr-0.151.jar
+
+FROM openjdk:8-alpine
+
+RUN apk add --no-cache ttf-dejavu
+
+COPY --from=0 /cfr-0.151.jar /cfr-0.151.jar
+
+ENTRYPOINT ["java", "-jar", "/cfr-0.151.jar"]

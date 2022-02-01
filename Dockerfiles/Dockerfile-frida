@@ -1,0 +1,15 @@
+FROM python:3
+
+RUN \
+    pip install frida-tools
+#RUN \
+#    apt-get update && apt-get install -y \
+#        udev \
+#        android-sdk-platform-tools \
+#    && pip install frida-tools
+#        usbutils \
+#    && usermod -aG plugdev root
+
+WORKDIR /shared
+
+ENTRYPOINT ["/bin/bash"] 
