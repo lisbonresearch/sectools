@@ -20,6 +20,14 @@ services:
     devices:
       - "/dev/bus"
 
+  androidstudio:
+    build:
+      context: .
+      dockerfile: Dockerfiles/Dockerfile-androidstudio
+    volumes:
+      - "./shared:/shared"
+      - "/tmp/.X11-unix:/tmp/.X11-unix"
+
   apktool:
     build:
       context: .
