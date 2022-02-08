@@ -1,18 +1,30 @@
 FROM debian
 
 RUN \
-    apt-get update && apt-get install -y \
-        unzip \
-        wget \
-    && wget https://github.com/icsharpcode/AvaloniaILSpy/releases/download/v7.0-rc2/linux-x64.zip \
-    && unzip linux-x64.zip \
-    && unzip ILSpy-linux-x64-Release.zip \
-    && mv artifacts ilspy
+	apt-get update && apt-get install -y \
+		unzip \
+		wget \
+	&& wget https://github.com/icsharpcode/AvaloniaILSpy/releases/download/v7.1-rc/Linux.x64.Release.zip \
+	&& unzip Linux.x64.Release.zip \
+	&& unzip ILSpy-linux-x64-Release.zip \
+	&& mv artifacts ilspy
 
 FROM mono
 
 COPY --from=0 /ilspy /ilspy
 
+RUN \
+	apt-get update \
+	&& apt-get install -y \
+		libice6 \
+		libsm6 \
+		xauth \
+	&& apt-get clean \
+	&& rm -rf /var/lib/apt/lists/*  \
+	&& echo '#!/bin/sh' > /start.sh \
+	&& echo 'xauth add $DISPLAY . $MAGICCOOKIE && /ilspy/linux-x64/ILSpy' >> /start.sh \
+	&& chmod ugo+x /start.sh
+
 WORKDIR /shared
 
-ENTRYPOINT ["/ilspy/linux-x64/ILSpy"]
+ENTRYPOINT ["/start.sh"]

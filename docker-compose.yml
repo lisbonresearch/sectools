@@ -106,6 +106,14 @@ services:
       context: .
       dockerfile: Dockerfiles/Dockerfile-impacket
 
+  insomnia:
+    build:
+      context: .
+      dockerfile: Dockerfiles/Dockerfile-insomnia
+    volumes:
+      - "./shared:/shared"
+      - "/tmp/.X11-unix:/tmp/.X11-unix"
+
   jadx:
     build:
       context: .

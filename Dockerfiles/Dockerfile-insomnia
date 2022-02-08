@@ -1,0 +1,23 @@
+FROM ubuntu
+
+RUN \
+	export DEBIAN_FRONTEND=noninteractive \
+	&& export DEBCONF_NONINTERACTIVE_SEEN=true \
+	&& echo 'tzdata tzdata/Areas select Etc' | debconf-set-selections \
+	&& echo 'tzdata tzdata/Zones/Etc select UTC' | debconf-set-selections \
+	&& apt-get update \
+	&& apt-get install -y \
+		wget \
+	&& wget https://github.com/Kong/insomnia/releases/download/core%402021.7.2/Insomnia.Core-2021.7.2.deb \
+	&& apt install -y /Insomnia.Core-2021.7.2.deb \
+	&& apt-get clean \
+	&& rm -rf /var/lib/apt/lists/* \
+	&& rm /Insomnia.Core-2021.7.2.deb \
+	&& echo '#!/bin/sh' > /start.sh \
+	&& echo 'xauth add $DISPLAY . $MAGICCOOKIE && /usr/bin/insomnia --no-sandbox' >> /start.sh \
+	&& chmod ugo+x /start.sh
+
+WORKDIR /shared
+
+ENTRYPOINT ["/start.sh"]
+
