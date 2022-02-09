@@ -17,8 +17,6 @@ services:
       dockerfile: Dockerfiles/Dockerfile-android-platformtools
     volumes:
       - "./shared:/shared"
-    devices:
-      - "/dev/bus"
 
   androidstudio:
     build:

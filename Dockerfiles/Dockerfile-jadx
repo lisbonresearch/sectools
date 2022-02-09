@@ -1,14 +1,22 @@
 FROM alpine
 
 RUN \
-    apk add --no-cache curl unzip && \
-    curl -L https://github.com/skylot/jadx/releases/download/v1.2.0/jadx-1.2.0.zip -o /jadx-1.2.0.zip && \
-    unzip /jadx-1.2.0.zip -d /jadx-1.2.0
+	apk add --no-cache \
+		curl \
+		unzip \
+	&& curl -L https://github.com/skylot/jadx/releases/download/v1.3.2/jadx-1.3.2.zip -o /jadx.zip \
+	&& unzip /jadx.zip -d /jadx
 
 FROM openjdk:8-alpine
 
-RUN apk add --no-cache ttf-dejavu
+RUN \
+	apk add --no-cache \
+		ttf-dejavu \
+		xauth \
+	&& echo '#!/bin/sh' > /start.sh \
+	&& echo 'xauth add $DISPLAY . $MAGICCOOKIE && /jadx/bin/jadx-gui' >> /start.sh \
+	&& chmod ugo+x /start.sh
 
-COPY --from=0 /jadx-1.2.0 /jadx-1.2.0
+COPY --from=0 /jadx /jadx
 
-ENTRYPOINT ["/jadx-1.2.0/bin/jadx-gui"]
+ENTRYPOINT ["/start.sh"]
