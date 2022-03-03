@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker-compose -f ../../docker-compose.yml run --rm ffuf "$@"
+docker-compose run --rm ffuf "$@"

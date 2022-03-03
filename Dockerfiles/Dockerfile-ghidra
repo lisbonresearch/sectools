@@ -1,34 +1,38 @@
 FROM alpine
 
 RUN \
-    apk add --no-cache curl && \
-    curl -L https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_10.0.3_build/ghidra_10.0.3_PUBLIC_20210908.zip -o /ghidra.zip && \
-    unzip ghidra.zip
+	apk add --no-cache curl \
+	&& curl -L https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_10.0.3_build/ghidra_10.0.3_PUBLIC_20210908.zip -o /ghidra.zip \
+	&& unzip ghidra.zip
 
 FROM openjdk:11
 
 RUN \
-    apt-get update && \
-    apt-get install -y \
-        openssh-client \
-        libxi6 \
-        libxrender1 \
-        libxtst6 \
-        libxfixes3 \
-        libasound2 \
-        libxcomposite1 \
-        libcairo2 \
-        libpango-1.0-0 \
-        libatspi2.0-0 \
-        libatk-bridge2.0-0 \
-        libdrm2 \
-        libgtk-3-0 \
-        libnspr4 \
-        libnss3 \
-        libgbm1 \
-        libxshmfence1 \
-        fonts-dejavu
+	apt-get update \
+	&& apt-get install -y \
+		xauth \
+		openssh-client \
+		libxi6 \
+		libxrender1 \
+		libxtst6 \
+		libxfixes3 \
+		libasound2 \
+		libxcomposite1 \
+		libcairo2 \
+		libpango-1.0-0 \
+		libatspi2.0-0 \
+		libatk-bridge2.0-0 \
+		libdrm2 \
+		libgtk-3-0 \
+		libnspr4 \
+		libnss3 \
+		libgbm1 \
+		libxshmfence1 \
+		fonts-dejavu \
+	&& echo '#!/bin/sh' > /start.sh \
+	&& echo 'xauth add $DISPLAY . $MAGICCOOKIE && /ghidra_10.0.3_PUBLIC/ghidraRun' >> /start.sh \
+	&& chmod ugo+x /start.sh
 
 COPY --from=0 /ghidra_10.0.3_PUBLIC /ghidra_10.0.3_PUBLIC
 
-ENTRYPOINT ["/ghidra_10.0.3_PUBLIC/ghidraRun"]
+ENTRYPOINT ["/start.sh"]
