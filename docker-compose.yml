@@ -223,3 +223,9 @@ services:
 
   wpscan:
     image: wpscanteam/wpscan
+
+  xcat:
+    image: tomforbes/xcat
+    working_dir: /shared
+    volumes:
+      - "./shared:/shared"
