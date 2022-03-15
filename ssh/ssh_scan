@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker-compose -f ../docker-compose.yml run --rm ssh_scan /app/bin/ssh_scan "$@"
+docker-compose run --rm ssh_scan /app/bin/ssh_scan "$@"
