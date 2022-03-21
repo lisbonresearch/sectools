@@ -140,6 +140,11 @@ services:
       context: .
       dockerfile: Dockerfiles/Dockerfile-jsbeautify
 
+  lynx:
+    build:
+      context: .
+      dockerfile: Dockerfiles/Dockerfile-lynx
+
   masscan:
     build:
       context: .
@@ -159,6 +164,13 @@ services:
     build:
       context: .
       dockerfile: Dockerfiles/Dockerfile-peepdf
+    working_dir: /shared
+    volumes:
+      - "./shared:/shared"
+
+  php:
+    image: php
+    command: /bin/bash
     working_dir: /shared
     volumes:
       - "./shared:/shared"
