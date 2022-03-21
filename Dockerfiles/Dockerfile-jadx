@@ -4,7 +4,7 @@ RUN \
 	apk add --no-cache \
 		curl \
 		unzip \
-	&& curl -L https://github.com/skylot/jadx/releases/download/v1.3.2/jadx-1.3.2.zip -o /jadx.zip \
+	&& curl -L https://github.com/skylot/jadx/releases/download/v1.3.4/jadx-1.3.4.zip -o /jadx.zip \
 	&& unzip /jadx.zip -d /jadx
 
 FROM openjdk:8-alpine
