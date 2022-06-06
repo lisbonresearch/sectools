@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker-compose -f ../docker-compose.yml run --rm nmap "$@"
+docker-compose run --rm nmap "$@"

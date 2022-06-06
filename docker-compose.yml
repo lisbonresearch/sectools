@@ -192,7 +192,7 @@ services:
       - "/tmp/.X11-unix:/tmp/.X11-unix"
 
   sourcegraph:
-    image: sourcegraph/server:3.37.0
+    image: sourcegraph/server:3.40.1
     ports:
       - "7080:7080"
       - "3070:3070"
@@ -200,6 +200,12 @@ services:
       - ./shared/sourcegraph/config:/etc/sourcegraph
       - ./shared/sourcegraph/data:/var/opt/sourcegraph
       - ./shared/sourcegraph/repos:/repos:ro
+
+  sourcegraph_servegit:
+    image: sourcegraph/src-cli
+    volumes:
+      - ./shared/servegit:/src
+    entrypoint: src serve-git /src
 
   sqlmap:
     build:
