@@ -1,0 +1,40 @@
+FROM alpine
+
+RUN \
+	apk add --no-cache \
+		curl \
+		unzip \
+	&& curl -L https://github.com/jindrapetrik/jpexs-decompiler/releases/download/version15.1.0/ffdec_15.1.0.zip -o ffdec.zip \
+	&& unzip /ffdec.zip -d /ffdec
+
+FROM openjdk:11
+
+RUN \
+	apt-get update \
+	&& apt-get install -y \
+		xauth \
+		openssh-client \
+		libxi6 \
+		libxrender1 \
+		libxtst6 \
+		libxfixes3 \
+		libasound2 \
+		libxcomposite1 \
+		libcairo2 \
+		libpango-1.0-0 \
+		libatspi2.0-0 \
+		libatk-bridge2.0-0 \
+		libdrm2 \
+		libgtk-3-0 \
+		libnspr4 \
+		libnss3 \
+		libgbm1 \
+		libxshmfence1 \
+		fonts-dejavu \
+	&& echo '#!/bin/sh' > /start.sh \
+	&& echo 'xauth add $DISPLAY . $MAGICCOOKIE && /ffdec/ffdec.sh' >> /start.sh \
+	&& chmod ugo+x /start.sh
+
+COPY --from=0 /ffdec /ffdec
+
+ENTRYPOINT ["/start.sh"]

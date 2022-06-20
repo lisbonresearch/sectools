@@ -6,8 +6,14 @@ RUN \
 
 FROM openjdk:8-alpine
 
-RUN apk add --no-cache ttf-dejavu
+RUN apk add --no-cache \
+		ttf-dejavu \
+		xauth \
+	&& echo '#!/bin/sh' > /start.sh \
+	&& echo 'xauth add $DISPLAY . $MAGICCOOKIE && java -jar /jd-gui-1.6.6.jar' >> /start.sh \
+	&& chmod ugo+x /start.sh
+
 
 COPY --from=0 /jd-gui-1.6.6.jar /jd-gui-1.6.6.jar
 
-ENTRYPOINT ["java", "-jar", "/jd-gui-1.6.6.jar"]
+ENTRYPOINT ["/start.sh"]

@@ -1,0 +1,4 @@
+#!/bin/sh
+
+MAGICCOOKIE=$(xauth list | awk '{print $3}' | head -n 1)
+sudo docker-compose run --rm -e DISPLAY=$DISPLAY -e MAGICCOOKIE=$MAGICCOOKIE ffdec

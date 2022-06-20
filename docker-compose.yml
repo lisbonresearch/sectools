@@ -55,6 +55,14 @@ services:
   evil-winrm:
     image: oscarakaelvis/evil-winrm
 
+  ffdec:
+    build:
+      context: .
+      dockerfile: Dockerfiles/Dockerfile-ffdec
+    volumes:
+      - "./shared:/shared"
+      - "/tmp/.X11-unix:/tmp/.X11-unix"
+
   ffuf:
     build:
       context: .
